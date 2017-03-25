@@ -82,3 +82,5 @@ Example:
  ```
 Also example of using this service placed in server/server_test.go in TestServerRun    
 coverage: 84.8% of statements  
+
+For test used github.com/stretchr/testify/require for checking.  
