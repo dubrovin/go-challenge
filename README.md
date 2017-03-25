@@ -1,9 +1,3 @@
-# go-challnge
-
-
-travel audience Go challenge
-============================
-
 Task
 ----
 
@@ -72,20 +66,18 @@ The service then calculates the result and returns it.
 	<<< { "number": [ 1, 2, 3, 5, 7, 8, 11, 13, 21 ] }
 
 
-Completion Conditions
----------------------
+Explanation and example
+----
 
-Solve the task described above using Go. Only use what's provided in the Go 
-standard library. The resulting program must run stand-alone with no other 
-dependencies than the Go compiler.
+Implemented service which exposes /numbers endpoint.   
+This endpoint makes get queries for given url in "u" param in GET query.    
+All get queries for given urls proceed in parallel,   
+for waiting for all this queries used sync.WaitGroup structure.
 
-Document your source code, both using comments and in a separate text file that 
-describes the intentions and rationale behind your solution. Also write down 
-any ambiguities that you see in the task description, and describe you how you 
-interpreted them and why. If applicable, write automated tests for your code.
-
-For testing purposes, you will be provided with an example server that, when 
-run, listens on port 8090 and provides the endpoints /primes, /fibo, /odd and 
-/rand.
-
-Please return your working solution within 7 days of receiving the challenge.
+Example:
+ ```
+ curl http://127.0.0.1:8080/numbers?u=http://127.0.0.1:8090/primes&u=http://127.0.0.1:8090/fibo  
+    
+ recieved: {"Numbers":[1,2,3,5,7,8,11,13,21]}  
+ ```
+Also example of using this service placed in server/server_test.go in TestServerRun  

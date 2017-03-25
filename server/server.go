@@ -14,6 +14,7 @@ import (
 type Number struct {
 	Numbers []int `json:"Numbers"`
 }
+
 type Server struct {
 	ListenAddr string
 	Client     *http.Client
@@ -90,6 +91,7 @@ func serverHandler(s *Server) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		for _, ur := range r.Form["u"] {
+			//check for valid url
 			parsedUrl, err := url.Parse(ur)
 			if err != nil {
 				log.Println("URL parse error", err)
@@ -104,10 +106,12 @@ func serverHandler(s *Server) func(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
+
 		s.mu.Lock()
 		s.Numbers = removeDuplicates(s.Numbers)
 		sort.Ints(s.Numbers)
 		s.mu.Unlock()
+
 		numbers := map[string][]int{"Numbers": s.Numbers}
 		json.NewEncoder(w).Encode(numbers)
 
