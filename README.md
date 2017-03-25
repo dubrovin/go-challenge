@@ -80,4 +80,5 @@ Example:
     
  recieved: {"Numbers":[1,2,3,5,7,8,11,13,21]}  
  ```
-Also example of using this service placed in server/server_test.go in TestServerRun  
+Also example of using this service placed in server/server_test.go in TestServerRun    
+coverage: 84.8% of statements  
