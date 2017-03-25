@@ -1,4 +1,4 @@
-package main
+package testserver
 
 import (
 	"encoding/json"
@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func main() {
+func Run() {
 	listenAddr := flag.String("http.addr", ":8090", "http listen address")
 	flag.Parse()
 
