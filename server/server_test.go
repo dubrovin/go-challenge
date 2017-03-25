@@ -10,15 +10,6 @@ import (
 	"encoding/json"
 )
 
-func init() {
-	go testserver.Run()
-	expectedTimeout := time.Millisecond * 500
-	addr := ":8080"
-	newServer := NewServer(addr, expectedTimeout)
-	go newServer.Run()
-
-}
-
 func TestNewServer(t *testing.T) {
 	expectedTimeout := time.Millisecond * 500
 	addr := ":8080"
@@ -30,6 +21,11 @@ func TestNewServer(t *testing.T) {
 
 
 func TestServerRun(t *testing.T) {
+	go testserver.Run()
+	expectedTimeout := time.Millisecond * 500
+	addr := ":8080"
+	newServer := NewServer(addr, expectedTimeout)
+	go newServer.Run()
 	resp, err := http.Get("http://127.0.0.1:8080/numbers?u=http://127.0.0.1:8090/primes&u=http://127.0.0.1:8090/fibo")
 	require.Nil(t, err)
 	require.NotNil(t, resp)
